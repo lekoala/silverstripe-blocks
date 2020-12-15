@@ -1,0 +1,17 @@
+---
+Name: blocks
+---
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - LeKoala\Blocks\BlocksLeftAndMainExtension
+---
+Name: blocks-fluent
+After:
+  - '#versionedfiles'
+Only:
+  moduleexists:
+    - 'tractorcow/silverstripe-fluent'
+---
+LeKoala\Blocks\Block:
+  extensions:
+    - 'TractorCow\Fluent\Extension\FluentExtension'
