@@ -5,6 +5,7 @@ namespace LeKoala\Blocks;
 use ReflectionClass;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\View\ArrayData;
 use SilverStripe\View\ViewableData;
 
 /**
@@ -22,7 +23,13 @@ class BaseBlock extends ViewableData
     public function __construct(Block $block)
     {
         $this->_block = $block;
-        $this->customise($block);
+
+        $data = $block->DataArray();
+        $settings = $block->SettingsArray();
+        $extra = $this->ExtraData();
+        $arrayData = new ArrayData(array_merge($data, $settings, $extra));
+
+        $this->setFailover($arrayData);
     }
 
     /**
