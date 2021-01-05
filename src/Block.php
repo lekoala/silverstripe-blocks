@@ -30,6 +30,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 
 /**
  * The block dataobject is used to actually store the data
@@ -691,6 +692,7 @@ final class Block extends DataObject
             $class = $list->dataClass();
             $singleton = $class::singleton();
             $gridConfig = GridFieldConfig_RecordEditor::create();
+            $gridConfig->removeComponentByType(GridFieldDeleteAction::class);
             if ($singleton->hasField('Sort')) {
                 $gridConfig->addComponent(new GridFieldOrderableRows());
             }
