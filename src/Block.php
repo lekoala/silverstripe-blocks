@@ -692,7 +692,7 @@ final class Block extends DataObject
             $class = $list->dataClass();
             $singleton = $class::singleton();
             $gridConfig = GridFieldConfig_RecordEditor::create();
-            $gridConfig->removeComponentByType(GridFieldDeleteAction::class);
+            $gridConfig->removeComponentsByType(GridFieldDeleteAction::class);
             if ($singleton->hasField('Sort')) {
                 $gridConfig->addComponent(new GridFieldOrderableRows());
             }
