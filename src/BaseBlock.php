@@ -49,7 +49,7 @@ class BaseBlock extends ViewableData
         if (!class_exists($class)) {
             $subclasses = ClassInfo::subclassesFor(DataObject::class);
             foreach ($subclasses as $lcName => $name) {
-                $nameClass = Block::getClassWithoutNamespace($name)->getShortName();
+                $nameClass = Block::getClassWithoutNamespace($name);
                 if ($class == $nameClass) {
                     $class = $name;
                     break;
@@ -58,7 +58,6 @@ class BaseBlock extends ViewableData
         }
         return $class::get();
     }
-
 
     public function updateFields(BlockFieldList $fields)
     {
