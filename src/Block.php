@@ -460,7 +460,7 @@ final class Block extends DataObject
      */
     public function BlockClass()
     {
-        return self::getClassWithoutNamespace($this->Type));
+        return self::getClassWithoutNamespace($this->Type);
     }
 
     /**
