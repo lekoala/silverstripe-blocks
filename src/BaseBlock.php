@@ -24,6 +24,10 @@ class BaseBlock extends ViewableData
     {
         $this->_block = $block;
 
+        // Allow calling base blocks methods (like Images, etc)
+        $this->customise($block);
+
+        // Allow calling any extra stuff on our block
         $data = $block->DataArray();
         $settings = $block->SettingsArray();
         $extra = $this->ExtraData();

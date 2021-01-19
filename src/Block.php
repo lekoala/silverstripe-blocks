@@ -64,7 +64,7 @@ final class Block extends DataObject
         'Type' => 'Varchar(59)',
         'MenuTitle' => 'Varchar(191)',
         'HTMLID' => 'Varchar(59)',
-        'Content' => 'HTMLText',
+        'Content' => 'HTMLText', // The rendered content
         // Localized data
         'BlockData' => DBJson::class,
         // Unlocalized data
@@ -177,6 +177,12 @@ final class Block extends DataObject
         return $this->Files()->Sort('SortOrder');
     }
 
+    /**
+     * This is called onBeforeWrite and renders content
+     * in order to store it in Content variable
+     *
+     * @return string
+     */
     public function renderWithTemplate()
     {
         $template = 'Blocks/' . $this->BlockClass();
@@ -596,6 +602,7 @@ final class Block extends DataObject
                 return new $class($this);
             }
         }
+        // If there is no type or type does not exist, render as content block
         return new ContentBlock($this);
     }
     /**
