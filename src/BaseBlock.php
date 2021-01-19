@@ -2,7 +2,6 @@
 
 namespace LeKoala\Blocks;
 
-use ReflectionClass;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\View\ArrayData;
@@ -50,7 +49,7 @@ class BaseBlock extends ViewableData
         if (!class_exists($class)) {
             $subclasses = ClassInfo::subclassesFor(DataObject::class);
             foreach ($subclasses as $lcName => $name) {
-                $nameClass = (new ReflectionClass($name))->getShortName();
+                $nameClass = Block::getClassWithoutNamespace($name)->getShortName();
                 if ($class == $nameClass) {
                     $class = $name;
                     break;

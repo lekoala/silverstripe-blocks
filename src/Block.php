@@ -2,7 +2,6 @@
 
 namespace LeKoala\Blocks;
 
-use ReflectionClass;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Image;
@@ -443,13 +442,25 @@ final class Block extends DataObject
     }
 
     /**
+     * Get a class name without namespace
+     *
+     * @param string $class
+     * @return string
+     */
+    public static function getClassWithoutNamespace($class)
+    {
+        $parts = explode("\\", $class);
+        return array_pop($parts);
+    }
+
+    /**
      * Get unqualified class of the block's type
      *
      * @return void
      */
     public function BlockClass()
     {
-        return (new ReflectionClass($this->Type))->getShortName();
+        return self::getClassWithoutNamespace($this->Type));
     }
 
     /**
@@ -795,7 +806,7 @@ final class Block extends DataObject
     {
         $list = [];
         foreach (self::listBlocks() as $lcClass => $class) {
-            $className = (new ReflectionClass($class))->getShortName();
+            $className = self::getClassWithoutNamespace($class);
             $list[$className] = $class;
         }
         return $list;
@@ -813,7 +824,7 @@ final class Block extends DataObject
         if (!$class) {
             return;
         }
-        $className = (new ReflectionClass($class))->getShortName();
+        $className = Block::getClassWithoutNamespace($class);
         return preg_replace('/Block$/', '', $className);
     }
 
@@ -825,7 +836,7 @@ final class Block extends DataObject
      */
     public function getFolderName()
     {
-        $className = (new ReflectionClass($this->owner))->getShortName();
+        $className = Block::getClassWithoutNamespace(get_class($this->owner));
         return $className . '/' . $this->owner->ID;
     }
 }
