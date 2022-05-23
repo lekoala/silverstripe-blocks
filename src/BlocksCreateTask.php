@@ -79,9 +79,9 @@ class BlocksCreateTask extends BuildTask
     public static function migrateFromOldClass()
     {
         DB::prepared_query("UPDATE Block SET ClassName = ?", [Block::class]);
-        DB::prepared_query("UPDATE SiteTree SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
-        DB::prepared_query("UPDATE SiteTree_Live SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
-        DB::prepared_query("UPDATE SiteTree_Versions SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
+        DB::prepared_query("UPDATE SiteTree SET ClassName = ? WHERE ClassName = ? OR ClassName = '' OR ClassName = 0", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
+        DB::prepared_query("UPDATE SiteTree_Live SET ClassName = ? WHERE ClassName = ? OR ClassName = '' OR ClassName = 0", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
+        DB::prepared_query("UPDATE SiteTree_Versions SET ClassName = ? WHERE ClassName = ? OR ClassName = '' OR ClassName = 0", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
     }
 
     /**
