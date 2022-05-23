@@ -1,14 +1,14 @@
 <?php
 
-namespace LeKoala\Dev;
+namespace LeKoala\Blocks;
 
 use Exception;
+use SilverStripe\ORM\DB;
 use LeKoala\Blocks\Block;
+use LeKoala\Blocks\BlocksPage;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\View\SSViewer;
 use SilverStripe\Control\Director;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\ORM\DB;
 
 /**
  * Assist in building blocks for your website
@@ -78,7 +78,10 @@ class BlocksCreateTask extends BuildTask
 
     public static function migrateFromOldClass()
     {
-        return DB::prepared_query("UPDATE Block SET ClassName = ?", [Block::class]);
+        DB::prepared_query("UPDATE Block SET ClassName = ?", [Block::class]);
+        DB::prepared_query("UPDATE SiteTree SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
+        DB::prepared_query("UPDATE SiteTree_Live SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
+        DB::prepared_query("UPDATE SiteTree_Versions SET ClassName = ? WHERE ClassName = ?", [BlocksPage::class, "LeKoala\\Base\\Blocks\\BlocksPage"]);
     }
 
     /**
