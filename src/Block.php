@@ -331,13 +331,17 @@ final class Block extends DataObject
     public static function getPublishedImageByID($ID)
     {
         if (class_exists(Versioned::class)) {
+            /** @var Image $image */
             $image = Versioned::get_one_by_stage(Image::class, 'Stage', "ID = " . (int) $ID);
         } else {
-            $image = Image::get()->byID($ID);
+            $image = Image::get_by_id($ID);
         }
         // This is just annoying
-        if ($image && !$image->isPublished()) {
-            $image->doPublish();
+        if ($image && $image->getVisibility() == "protected") {
+            $image->publishFile();
+            if (class_exists(Versioned::class)) {
+                $image->publishSingle();
+            }
         }
         return $image;
     }
@@ -351,13 +355,17 @@ final class Block extends DataObject
     public static function getPublishedFileByID($ID)
     {
         if (class_exists(Versioned::class)) {
+            /** @var File $file */
             $file = Versioned::get_one_by_stage(File::class, 'Stage', "ID = " . (int) $ID);
         } else {
-            $file = File::get()->byID($ID);
+            $file = File::get_by_id($ID);
         }
         // This is just annoying
-        if ($file && !$file->isPublished()) {
-            $file->doPublish();
+        if ($file && $file->getVisibility() == "protected") {
+            $file->publishFile();
+            if (class_exists(Versioned::class)) {
+                $file->publishSingle();
+            }
         }
         return $file;
     }
