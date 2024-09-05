@@ -42,8 +42,9 @@ class BlocksLeftAndMainExtension extends LeftAndMainExtension
             $currentLocale = $state->getLocale();
             $allLocales = \TractorCow\Fluent\Model\Locale::get()->exclude('Locale', $currentLocale);
             foreach ($allLocales as $locale) {
-                $state->withState(function ($state) use ($locale, $Page, $DataCopy) {
+                $state->withState(function ($state) use ($locale, $ID, $DataCopy) {
                     $state->setLocale($locale->Locale);
+                    $Page = BlocksPage::get()->byID($ID);
 
                     foreach ($Page->Blocks() as $Block) {
                         if (!$Block->BlockData) {
@@ -55,7 +56,6 @@ class BlocksLeftAndMainExtension extends LeftAndMainExtension
                     $Page->publishRecursive();
                 });
             }
-
             // Preserve original data
             // TODO: understand why Data is emptied
             foreach ($Blocks as $Block) {
@@ -69,7 +69,5 @@ class BlocksLeftAndMainExtension extends LeftAndMainExtension
         return $owner->getResponseNegotiator()->respond($owner->getRequest());
     }
 
-    public function init()
-    {
-    }
+    public function init() {}
 }
