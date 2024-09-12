@@ -19,7 +19,6 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\PasswordField;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\TextareaField;
-use LeKoala\Base\Forms\InputMaskField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\OptionsetField;
 use LeKoala\Blocks\Fields\ColumnsField;
@@ -287,22 +286,22 @@ class BuildableFieldList extends FieldList
      * @param string $name Name without id since it's used as $record->{"{$fieldname}ID"} = $id;
      * @param string $title
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\FilePondField
+     * @return \LeKoala\FilePond\FilePondField
      */
     public function addFilePond($name = "Image", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\FilePondField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\FilePond\FilePondField::class, $name, $title, $attributes);
     }
 
     /**
      * @param string $name Name without id since it's used as $record->{"{$fieldname}ID"} = $id;
      * @param string $title
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\FilePondField
+     * @return \LeKoala\FilePond\FilePondField
      */
     public function addSingleFilePond($name = "Image", $title = null, $attributes = [])
     {
-        $fp = $this->addField(\LeKoala\Base\Forms\FilePondField::class, $name, $title, $attributes);
+        $fp = $this->addField(\LeKoala\FilePond\FilePondField::class, $name, $title, $attributes);
         $fp->setAllowedMaxFileNumber(1);
         return $fp;
     }
@@ -459,11 +458,11 @@ class BuildableFieldList extends FieldList
      * @param string $title
      * @param array $src
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\InputMaskDateField
+     * @return \LeKoala\FormElements\InputMaskDateField
      */
     public function addDateMask($name = "BirthDate", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\InputMaskDateField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\FormElements\InputMaskDateField::class, $name, $title, $attributes);
     }
 
     /**
@@ -471,11 +470,11 @@ class BuildableFieldList extends FieldList
      * @param string $title
      * @param array $src
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\InputMaskNumericField
+     * @return \LeKoala\FormElements\InputMaskNumericField
      */
     public function addNumericMask($name = "Number", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\InputMaskNumericField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\FormElements\InputMaskNumericField::class, $name, $title, $attributes);
     }
 
     /**
@@ -483,22 +482,22 @@ class BuildableFieldList extends FieldList
      * @param string $title
      * @param array $src
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\InputMaskCurrencyField
+     * @return \LeKoala\FormElements\InputMaskCurrencyField
      */
     public function addCurrencyMask($name = "Amount", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\InputMaskCurrencyField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\FormElements\InputMaskCurrencyField::class, $name, $title, $attributes);
     }
     /**
      * @param string $name
      * @param string $title
      * @param array $src
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\InputMaskDateField
+     * @return \LeKoala\FormElements\InputMaskIntegerField
      */
     public function addIntegerMask($name = "Number", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\InputMaskIntegerField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\FormElements\InputMaskIntegerField::class, $name, $title, $attributes);
     }
 
     /**
@@ -516,11 +515,11 @@ class BuildableFieldList extends FieldList
      * @param string $name
      * @param string $title
      * @param array $attributes
-     * @return \LeKoala\Base\Forms\PhoneField
+     * @return \LeKoala\PhoneNumber\PhoneField
      */
     public function addPhone($name = "Phone", $title = null, $attributes = [])
     {
-        return $this->addField(\LeKoala\Base\Forms\PhoneField::class, $name, $title, $attributes);
+        return $this->addField(\LeKoala\PhoneNumber\PhoneField::class, $name, $title, $attributes);
     }
 
     /**
