@@ -13,6 +13,21 @@ use PageController;
  */
 class BlocksPageController extends PageController
 {
+    protected function init()
+    {
+        parent::init();
+
+        // Add requirements
+        /** @var \LeKoala\Blocks\Block $block */
+        foreach($this->Blocks() as $block) {
+            $type = $block->getTypeInstance();
+            $class = get_class($type);
+            if(method_exists($class, 'Requirements')) {
+                $class::Requirements();
+            }
+        }
+    }
+
     public function BodyClass()
     {
         $class = parent::BodyClass();

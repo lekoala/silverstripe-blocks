@@ -632,7 +632,7 @@ final class Block extends DataObject
     public function Summary()
     {
         // Read from content
-        $summary = trim(\strip_tags($this->Content));
+        $summary = trim(\strip_tags($this->Content ?? ''));
         $shortSummary = \substr($summary, 0, 100);
         // Collapse whitespace
         $shortSummary = preg_replace('/\s+/', ' ', $shortSummary);
