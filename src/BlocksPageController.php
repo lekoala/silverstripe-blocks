@@ -19,10 +19,10 @@ class BlocksPageController extends PageController
 
         // Add requirements
         /** @var \LeKoala\Blocks\Block $block */
-        foreach($this->Blocks() as $block) {
+        foreach ($this->Blocks() as $block) {
             $type = $block->getTypeInstance();
             $class = get_class($type);
-            if(method_exists($class, 'Requirements')) {
+            if (method_exists($class, 'Requirements')) {
                 $class::Requirements();
             }
         }
